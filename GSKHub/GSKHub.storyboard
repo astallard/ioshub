@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZqU-fs-1nW">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--RootViewController-->
+        <scene sceneID="an6-S2-t3j">
+            <objects>
+                <viewController storyboardIdentifier="rootView" id="ZqU-fs-1nW" userLabel="RootViewController" customClass="RootViewController" customModule="GSKHub" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9fw-Sj-H7g"/>
+                        <viewControllerLayoutGuide type="bottom" id="djI-Ph-cIo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uJJ-Jv-9tz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dr2-8S-bFw">
+                                <rect key="frame" x="0.0" y="30" width="375" height="637"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8iV-kI-1ms" userLabel="Status View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IIa-1j-5Fe">
+                                        <rect key="frame" x="5" y="5" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="color" red="1" green="0.4760972798957761" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to GSK Hub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbT-qb-Jiu">
+                                        <rect key="frame" x="0.0" y="5" width="375" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                        <color key="textColor" red="1" green="0.4760972798957761" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="itg-vc-544" userLabel="Control View">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="RtS-Uj-gKA">
+                                        <rect key="frame" x="32" y="10" width="310" height="25"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLt-Oa-K4B">
+                                                <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="back">
+                                                    <color key="titleColor" red="1" green="0.42352941176470588" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="prevButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="AVf-gT-ecE"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhE-1g-IDM">
+                                                <rect key="frame" x="57" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="next">
+                                                    <color key="titleColor" red="1" green="0.42352941176470588" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="nextButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="bys-0T-lDE"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Si3-TY-gp7">
+                                                <rect key="frame" x="114" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="home">
+                                                    <color key="titleColor" red="1" green="0.42352941176470588" blue="0.18431372549019609" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="homeButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="6i0-Ya-P2U"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLL-WO-1Wo">
+                                                <rect key="frame" x="171" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="profile"/>
+                                                <connections>
+                                                    <action selector="profileButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="ohG-fj-gVf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfY-NY-Nhw" userLabel="Settings Button">
+                                                <rect key="frame" x="228" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="settings"/>
+                                                <connections>
+                                                    <action selector="settingsButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="k1R-cA-MFl"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVt-ZZ-fmM" userLabel="Travel Button">
+                                                <rect key="frame" x="285" y="0.0" width="25" height="25"/>
+                                                <state key="normal" image="travel"/>
+                                                <connections>
+                                                    <action selector="travelButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="c1b-hg-hGm"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="controlView" destination="itg-vc-544" id="WiO-Iv-cdm"/>
+                        <outlet property="homeButton" destination="Si3-TY-gp7" id="S8D-SA-zhz"/>
+                        <outlet property="loadingIndicator" destination="IIa-1j-5Fe" id="EMh-xp-c4l"/>
+                        <outlet property="nextButton" destination="DhE-1g-IDM" id="fKg-du-iUb"/>
+                        <outlet property="prevButton" destination="RLt-Oa-K4B" id="1e9-df-Hcf"/>
+                        <outlet property="profileButton" destination="LLL-WO-1Wo" id="YRY-8B-TAy"/>
+                        <outlet property="settingsButton" destination="nfY-NY-Nhw" id="64q-ki-rVM"/>
+                        <outlet property="statusBarlabel" destination="mbT-qb-Jiu" id="yn7-8P-bTT"/>
+                        <outlet property="travelButton" destination="LVt-ZZ-fmM" id="LRp-ns-Cxk"/>
+                        <outlet property="webView" destination="dr2-8S-bFw" id="cCH-fj-GAZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zm3-oX-znk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="151.57421289355324"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="25" height="25"/>
+        <image name="home" width="25" height="25"/>
+        <image name="next" width="25" height="25"/>
+        <image name="profile" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
+        <image name="travel" width="25" height="25"/>
+    </resources>
+</document>

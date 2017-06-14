@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 47;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F36A3671DC175BD00FEACD7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F36A3661DC175BD00FEACD7 /* Images.xcassets */; };
+		4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F393A281C3C8BCD00B3EA13 /* main.swift */; };
+		4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */; };
+		4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C49C1B755242002F9F90 /* RootViewController.swift */; };
+		7516C7371EF0471000F56656 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7516C7361EF0471000F56656 /* InitialViewController.swift */; };
+		7516C7391EF178E900F56656 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7516C7381EF178E800F56656 /* Settings.bundle */; };
+		75F2B3A91EF01AE600BB581A /* GSKHub.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */; };
+		75F2B3AB1EF0240200BB581A /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2B3AA1EF0240200BB581A /* UIUtilities.swift */; };
+		78A235BD93AB7D080D67CD51 /* Pods_GSKHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_GSKHub.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		045D1C5BC2F1EADFDFB3671E /* Pods-GSKHub.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSKHub.release.xcconfig"; path = "Pods/Target Support Files/Pods-GSKHub/Pods-GSKHub.release.xcconfig"; sourceTree = "<group>"; };
+		4F36A3661DC175BD00FEACD7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "node_modules/SalesforceMobileSDK-iOS/shared/resources/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		4F393A281C3C8BCD00B3EA13 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		4FD6C4741B754AF1002F9F90 /* GSKHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GSKHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FD6C4781B754AF1002F9F90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4FD6C49A1B755242002F9F90 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		4FD6C49C1B755242002F9F90 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		4FF12F8A1DCA91F5004D9EF9 /* GSKHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GSKHub.entitlements; sourceTree = "<group>"; };
+		7516C7361EF0471000F56656 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		7516C7381EF178E800F56656 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GSKHub.storyboard; sourceTree = "<group>"; };
+		75F2B3AA1EF0240200BB581A /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
+		762732C14CFE40A989C3AD70 /* Pods-GSKHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSKHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GSKHub/Pods-GSKHub.debug.xcconfig"; sourceTree = "<group>"; };
+		82A29C75280BDF73123F14B4 /* Pods_GSKHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GSKHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4FD6C4711B754AF1002F9F90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				78A235BD93AB7D080D67CD51 /* Pods_GSKHub.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4FD6C46B1B754AF1002F9F90 = {
+			isa = PBXGroup;
+			children = (
+				7516C7381EF178E800F56656 /* Settings.bundle */,
+				4FD6C4761B754AF1002F9F90 /* GSKHub */,
+				4FD6C4751B754AF1002F9F90 /* Products */,
+				DDFDDF0A29E4BDD114B51BBC /* Pods */,
+				6B868AEB1ACA7FCA4636C7F7 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4FD6C4751B754AF1002F9F90 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4FD6C4741B754AF1002F9F90 /* GSKHub.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4FD6C4761B754AF1002F9F90 /* GSKHub */ = {
+			isa = PBXGroup;
+			children = (
+				4FF12F8A1DCA91F5004D9EF9 /* GSKHub.entitlements */,
+				4FD6C4A11B755265002F9F90 /* Classes */,
+				4FD6C4771B754AF1002F9F90 /* Supporting Files */,
+			);
+			path = GSKHub;
+			sourceTree = "<group>";
+		};
+		4FD6C4771B754AF1002F9F90 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4F36A3661DC175BD00FEACD7 /* Images.xcassets */,
+				4FD6C4781B754AF1002F9F90 /* Info.plist */,
+				75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4FD6C4A11B755265002F9F90 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				4FD6C49A1B755242002F9F90 /* Bridging-Header.h */,
+				4FD6C49C1B755242002F9F90 /* RootViewController.swift */,
+				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
+				4F393A281C3C8BCD00B3EA13 /* main.swift */,
+				75F2B3AA1EF0240200BB581A /* UIUtilities.swift */,
+				7516C7361EF0471000F56656 /* InitialViewController.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		6B868AEB1ACA7FCA4636C7F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				82A29C75280BDF73123F14B4 /* Pods_GSKHub.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDFDDF0A29E4BDD114B51BBC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				762732C14CFE40A989C3AD70 /* Pods-GSKHub.debug.xcconfig */,
+				045D1C5BC2F1EADFDFB3671E /* Pods-GSKHub.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4FD6C4731B754AF1002F9F90 /* GSKHub */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4FD6C4931B754AF1002F9F90 /* Build configuration list for PBXNativeTarget "GSKHub" */;
+			buildPhases = (
+				FF74F0F7AF3E58C14EBE5178 /* [CP] Check Pods Manifest.lock */,
+				4FD6C4701B754AF1002F9F90 /* Sources */,
+				4FD6C4711B754AF1002F9F90 /* Frameworks */,
+				4FD6C4721B754AF1002F9F90 /* Resources */,
+				68C67C5E03B67EF3A0901D3D /* [CP] Copy Pods Resources */,
+				7056FC8D1D194E5113988767 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GSKHub;
+			productName = GSKHub;
+			productReference = 4FD6C4741B754AF1002F9F90 /* GSKHub.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4FD6C46C1B754AF1002F9F90 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = Salesforce;
+				TargetAttributes = {
+					4FD6C4731B754AF1002F9F90 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4WQ2T93P22;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
+				};
+			};
+			buildConfigurationList = 4FD6C46F1B754AF1002F9F90 /* Build configuration list for PBXProject "GSKHub" */;
+			compatibilityVersion = "Xcode 6.3";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4FD6C46B1B754AF1002F9F90;
+			productRefGroup = 4FD6C4751B754AF1002F9F90 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4FD6C4731B754AF1002F9F90 /* GSKHub */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4FD6C4721B754AF1002F9F90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				75F2B3A91EF01AE600BB581A /* GSKHub.storyboard in Resources */,
+				7516C7391EF178E900F56656 /* Settings.bundle in Resources */,
+				4F36A3671DC175BD00FEACD7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68C67C5E03B67EF3A0901D3D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GSKHub/Pods-GSKHub-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7056FC8D1D194E5113988767 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GSKHub/Pods-GSKHub-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF74F0F7AF3E58C14EBE5178 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4FD6C4701B754AF1002F9F90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7516C7371EF0471000F56656 /* InitialViewController.swift in Sources */,
+				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
+				4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */,
+				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
+				75F2B3AB1EF0240200BB581A /* UIUtilities.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4FD6C4911B754AF1002F9F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4FD6C4921B754AF1002F9F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4FD6C4941B754AF1002F9F90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 762732C14CFE40A989C3AD70 /* Pods-GSKHub.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = GSKHub/GSKHub.entitlements;
+				DEVELOPMENT_TEAM = 4WQ2T93P22;
+				INFOPLIST_FILE = GSKHub/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforce.internal.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b9a86a98-3dd0-49ec-ba52-b67fd5724ab8";
+				PROVISIONING_PROFILE_SPECIFIER = "GSKHub Development";
+				SWIFT_OBJC_BRIDGING_HEADER = "GSKHub/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		4FD6C4951B754AF1002F9F90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 045D1C5BC2F1EADFDFB3671E /* Pods-GSKHub.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = GSKHub/GSKHub.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4WQ2T93P22;
+				INFOPLIST_FILE = GSKHub/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforce.internal.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20a91d09-1308-4257-ab78-e1878b4c9d0f";
+				PROVISIONING_PROFILE_SPECIFIER = "GSKHub Distribution";
+				SWIFT_OBJC_BRIDGING_HEADER = "GSKHub/Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4FD6C46F1B754AF1002F9F90 /* Build configuration list for PBXProject "GSKHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FD6C4911B754AF1002F9F90 /* Debug */,
+				4FD6C4921B754AF1002F9F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4FD6C4931B754AF1002F9F90 /* Build configuration list for PBXNativeTarget "GSKHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4FD6C4941B754AF1002F9F90 /* Debug */,
+				4FD6C4951B754AF1002F9F90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4FD6C46C1B754AF1002F9F90 /* Project object */;
+}
