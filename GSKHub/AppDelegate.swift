@@ -26,8 +26,14 @@ import Foundation
 import UIKit
 import SalesforceSDKCore
 
-// Fill these in when creating a new Connected Application on Force.com
-let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp";
+// Fill these in when creating a new Connected Application on Force.com 
+
+//DEVELOPMENT
+//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp";
+//let OAuthRedirectURI        = "mymobileapp://callback";
+
+//DISTRIBUTION
+let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg==";
 let OAuthRedirectURI        = "mymobileapp://callback";
 
 class AppDelegate : UIResponder, UIApplicationDelegate

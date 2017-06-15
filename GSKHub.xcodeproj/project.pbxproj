@@ -358,6 +358,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = GSKHub/GSKHub.entitlements;
 				DEVELOPMENT_TEAM = 4WQ2T93P22;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = GSKHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -379,6 +380,7 @@
 				CODE_SIGN_ENTITLEMENTS = GSKHub/GSKHub.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 4WQ2T93P22;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = GSKHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
