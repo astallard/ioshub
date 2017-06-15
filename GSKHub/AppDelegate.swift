@@ -29,12 +29,12 @@ import SalesforceSDKCore
 // Fill these in when creating a new Connected Application on Force.com 
 
 //DEVELOPMENT
-//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp";
-//let OAuthRedirectURI        = "mymobileapp://callback";
+let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp";
+let OAuthRedirectURI        = "mymobileapp://callback";
 
 //DISTRIBUTION
-let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg==";
-let OAuthRedirectURI        = "mymobileapp://callback";
+//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg==";
+//let OAuthRedirectURI        = "mymobileapp://callback";
 
 class AppDelegate : UIResponder, UIApplicationDelegate
 {
@@ -106,23 +106,24 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         // if you want to receive push notifications from Salesforce, you will also need to
         // implement the application:didRegisterForRemoteNotificationsWithDeviceToken: method (below).
         //
-        SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
+        //
         
+        //SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
+
         //
         //Uncomment the code below to see how you can customize the color, textcolor, font and fontsize of the navigation bar
         //
-        // let loginViewController = SFLoginViewController.sharedInstance();
+        let loginViewController = SFLoginViewController.sharedInstance();
         //Set showNavBar to NO if you want to hide the top bar
         // loginViewController.showNavbar = true;
         //Set showSettingsIcon to NO if you want to hide the settings icon on the nav bar
-        // loginViewController.showSettingsIcon = true;
+        loginViewController.showSettingsIcon = true;
         // Set primary color to different color to style the navigation header
-        // loginViewController.navBarColor = UIColor(red: 0.051, green: 0.765, blue: 0.733, alpha: 1.0);
-        // loginViewController.navBarFont = UIFont (name: "Helvetica Neue", size: 16);
-        // loginViewController.navBarTextColor = UIColor.black;
+        loginViewController.navBarColor = UIColor(red: 1.0, green: 0.45, blue: 0.2, alpha: 1.0);
+        loginViewController.navBarTextColor = UIColor.white;
         //
         SalesforceSDKManager.shared().launch()
-        
+
         return true
     }
     
@@ -143,7 +144,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error )
     {
         // Respond to any push notification registration errors here.
-        print("AppDelegate: we've registered for push notifications, error is \(error.localizedDescription)")
+        print("AppDelegate: Push Notifications failed, error is \(error.localizedDescription)")
 
     }
     
@@ -158,6 +159,10 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         
         // return  SFAuthenticationManager.shared().handleAdvancedAuthenticationResponse(url)
         return false;
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print("AppDelegate:application didReceiveRemoteNotification userInfo is \(userInfo)")
     }
     
     // MARK: - Private methods
@@ -195,7 +200,6 @@ class AppDelegate : UIResponder, UIApplicationDelegate
                 return
             }
         }
-        
         postResetBlock()
     }
     

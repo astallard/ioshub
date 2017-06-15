@@ -51,6 +51,8 @@ class RootViewController : UIViewController, UIWebViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
+        
         //set the web view delegate
         webView?.delegate = self
         
@@ -196,6 +198,7 @@ class RootViewController : UIViewController, UIWebViewDelegate
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
         print("RootViewController: Webview failed to load anything, error is \(error.localizedDescription)")
     }
+    
     
     // MARK: - Memory Functions
     
