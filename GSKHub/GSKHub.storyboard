@@ -24,7 +24,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uJe-Hc-hNg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iV-kI-1ms" userLabel="Status View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8iV-kI-1ms" userLabel="Status View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IIa-1j-5Fe">
@@ -82,15 +82,15 @@
                                             <constraint firstItem="IIa-1j-5Fe" firstAttribute="leading" secondItem="8iV-kI-1ms" secondAttribute="leading" constant="15" id="v23-FA-p1Q"/>
                                         </constraints>
                                     </view>
-                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dr2-8S-bFw">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3s7-IE-Vnj" userLabel="WKWebView Placeholder View">
                                         <rect key="frame" x="0.0" y="50" width="375" height="567"/>
-                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </webView>
-                                    <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="itg-vc-544" userLabel="Control View">
+                                        <color key="backgroundColor" red="1" green="0.55721506753073302" blue="0.0020686525413301515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="itg-vc-544" userLabel="Control View">
                                         <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="RtS-Uj-gKA">
-                                                <rect key="frame" x="32" y="10" width="310" height="25"/>
+                                                <rect key="frame" x="32.5" y="10" width="310" height="25"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLt-Oa-K4B">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
@@ -126,11 +126,11 @@
                                                             <action selector="profileButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="ohG-fj-gVf"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfY-NY-Nhw" userLabel="Settings Button">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cs-5S-TEd" userLabel="Translate Button">
                                                         <rect key="frame" x="228" y="0.0" width="25" height="25"/>
-                                                        <state key="normal" image="settings"/>
+                                                        <state key="normal" image="translate"/>
                                                         <connections>
-                                                            <action selector="settingsButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="k1R-cA-MFl"/>
+                                                            <action selector="translateButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="afv-6z-UAU"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVt-ZZ-fmM" userLabel="Travel Button">
@@ -154,7 +154,6 @@
                                 <constraints>
                                     <constraint firstItem="8iV-kI-1ms" firstAttribute="leading" secondItem="uJe-Hc-hNg" secondAttribute="leading" id="9zN-hF-zM9"/>
                                     <constraint firstAttribute="trailing" secondItem="8iV-kI-1ms" secondAttribute="trailing" id="FFO-hs-Rhn"/>
-                                    <constraint firstItem="dr2-8S-bFw" firstAttribute="centerY" secondItem="uJe-Hc-hNg" secondAttribute="centerY" id="kzO-Zw-JeM"/>
                                     <constraint firstItem="8iV-kI-1ms" firstAttribute="top" secondItem="uJe-Hc-hNg" secondAttribute="top" id="uFX-zx-BSx"/>
                                 </constraints>
                             </stackView>
@@ -176,11 +175,11 @@
                         <outlet property="notificationButton" destination="jGp-ja-YXF" id="gta-jQ-e9l"/>
                         <outlet property="prevButton" destination="RLt-Oa-K4B" id="1e9-df-Hcf"/>
                         <outlet property="profileButton" destination="LLL-WO-1Wo" id="YRY-8B-TAy"/>
-                        <outlet property="settingsButton" destination="nfY-NY-Nhw" id="64q-ki-rVM"/>
                         <outlet property="statusBarlabel" destination="mbT-qb-Jiu" id="yn7-8P-bTT"/>
+                        <outlet property="translateButton" destination="3Cs-5S-TEd" id="5j0-yM-xMi"/>
                         <outlet property="travelButton" destination="LVt-ZZ-fmM" id="LRp-ns-Cxk"/>
                         <outlet property="warningButton" destination="KtL-XH-3rt" id="r2g-D5-XUr"/>
-                        <outlet property="webView" destination="dr2-8S-bFw" id="cCH-fj-GAZ"/>
+                        <outlet property="webPlaceholderView" destination="3s7-IE-Vnj" id="B8H-P0-XUH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zm3-oX-znk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -194,7 +193,7 @@
         <image name="next" width="25" height="25"/>
         <image name="notification" width="25" height="25"/>
         <image name="profile" width="25" height="25"/>
-        <image name="settings" width="25" height="25"/>
+        <image name="translate" width="25" height="25"/>
         <image name="travel" width="25" height="25"/>
         <image name="warning" width="25" height="25"/>
     </resources>

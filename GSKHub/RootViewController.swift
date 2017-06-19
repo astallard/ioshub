@@ -26,24 +26,31 @@ import Foundation
 import UIKit
 import SalesforceSDKCore
 import AVFoundation
+import WebKit
 
-class RootViewController : UIViewController, UIWebViewDelegate
+class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
 {
     // MARK: - UI fields
     
-    @IBOutlet weak var webView: UIWebView!
+    //@IBOutlet weak var webView: UIWebView!
+
+    
+    @IBOutlet weak var webPlaceholderView: UIView!
     @IBOutlet weak var controlView: UIView!
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var translateButton: UIButton!
     @IBOutlet weak var travelButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var statusBarlabel: UILabel!
     @IBOutlet weak var notificationButton: UIButton!
     @IBOutlet weak var notifcationLabel: UILabel!
     @IBOutlet weak var warningButton: UIButton!
+    
+    var webView : WKWebView!
     
     var baseUrl : String = ""
     var allowExternalURLs : Bool = false
@@ -55,7 +62,14 @@ class RootViewController : UIViewController, UIWebViewDelegate
 
     
     // MARK: - Lifecycle Functions
-
+    
+    override func loadView() {
+        super.loadView()
+        webView = WKWebView();
+        webView?.uiDelegate = self
+        webView?.navigationDelegate = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,9 +80,18 @@ class RootViewController : UIViewController, UIWebViewDelegate
         // Register for internal app notifications
         NotificationCenter.default.addObserver(self, selector: #selector(remoteNotification), name: NSNotification.Name(rawValue: "remoteNotification"), object: nil)
 
-        
-        //set the web view delegate
-        webView?.delegate = self
+        // Configure the web view
+        webView.frame = self.webPlaceholderView.bounds
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        self.webPlaceholderView.addSubview(webView)
+
+        let topConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutAttribute.top, relatedBy: NSLayoutRelation.equal, toItem: webPlaceholderView, attribute: NSLayoutAttribute.top, multiplier: 1.0, constant: 0);
+        let widthConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: webPlaceholderView, attribute: NSLayoutAttribute.width, multiplier: 1.0, constant: 0);
+        let heightConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: webPlaceholderView, attribute: NSLayoutAttribute.height, multiplier: 1.0, constant: 0);
+        webPlaceholderView.addConstraint(topConstraint);
+        webPlaceholderView.addConstraint(widthConstraint);
+        webPlaceholderView.addConstraint(heightConstraint);
+
         
         //set the loading indicator to hidden
         loadingIndicator.stopAnimating()
@@ -86,8 +109,8 @@ class RootViewController : UIViewController, UIWebViewDelegate
         if let sfAccessToken = SFAuthenticationManager.shared().coordinator.credentials.accessToken {
             self.accessToken = sfAccessToken
                         
-            let urlString = "https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/secur/frontdoor.jsp?sid=" + self.accessToken + "&retURL=https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/s/";
-            //let urlString = "\(self.baseUrl)/secur/frontdoor.jsp?sid=\(self.accessToken)&retURL=\(self.baseUrl)/s/"
+            //let urlString = "https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/secur/frontdoor.jsp?sid=" + self.accessToken + "&retURL=https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/s/";
+            let urlString = "\(self.baseUrl)/secur/frontdoor.jsp?sid=\(self.accessToken)&retURL=\(self.baseUrl)/s/"
             
             //update the welcome label
             statusBarlabel.text = "Welcome " + (SFUserAccountManager.sharedInstance().currentUser?.fullName)! + " to GSK Hub"
@@ -95,14 +118,14 @@ class RootViewController : UIViewController, UIWebViewDelegate
             //point the web view at the default URL
             if let url = NSURL(string: urlString) {
                 let req = NSURLRequest(url: url as URL)
-                webView?.loadRequest(req as URLRequest)
+                webView?.load(req as URLRequest)
             }
         } else {
             print("Count not get a valid access token, the user needs to sign in");
         }
         
     }
-    
+
     // MARK: - Internal Notification Functions
     
     func remoteNotification(notification: NSNotification) {
@@ -156,8 +179,14 @@ class RootViewController : UIViewController, UIWebViewDelegate
         showSettingsPage()
     }
     
+    @IBAction func translateButtonTouchUpInside(_ sender: Any) {
+        print("RootViewController:translateButtonTouchUpInside called")
+        translatePage()
+
+    }
+    
     @IBAction func travelButtonTouchUpInside(_ sender: Any) {
-        print("RootViewController:settingsButtonTouchUpInside called")
+        print("RootViewController:travelButtonTouchUpInside called")
         showTravelPage()
     }
     
@@ -173,7 +202,7 @@ class RootViewController : UIViewController, UIWebViewDelegate
         
         if let url = NSURL(string: urlString) {
             let req = NSURLRequest(url: url as URL)
-            webView?.loadRequest(req as URLRequest)
+            webView?.load(req as URLRequest)
         }
     }
     
@@ -183,7 +212,7 @@ class RootViewController : UIViewController, UIWebViewDelegate
             
             if let url = NSURL(string: urlString) {
                 let req = NSURLRequest(url: url as URL)
-                webView?.loadRequest(req as URLRequest)
+                webView?.load(req as URLRequest)
             }
         } else {
             print("RootViewController:showProfilePage - could not get user Id")
@@ -196,7 +225,7 @@ class RootViewController : UIViewController, UIWebViewDelegate
             
             if let url = NSURL(string: urlString) {
                 let req = NSURLRequest(url: url as URL)
-                webView?.loadRequest(req as URLRequest)
+                webView?.load(req as URLRequest)
             }
         } else {
             print("RootViewController:showSettingsPage - could not get user Id")
@@ -208,10 +237,33 @@ class RootViewController : UIViewController, UIWebViewDelegate
         
         if let url = NSURL(string: urlString) {
             let req = NSURLRequest(url: url as URL)
-            webView?.loadRequest(req as URLRequest)
+            webView?.load(req as URLRequest)
         }
     }
     
+    func translatePage() {
+        // get the current URL
+        let currentUrlString = webView.url?.absoluteString
+        
+        // call google translate
+        if let currentUrlString = currentUrlString {
+            var urlString = ""
+            
+            // are we in the community?
+            if(currentUrlString.hasPrefix(baseUrl)) {
+                urlString = "https://translate.google.com/translate?hl=en&sl=en&tl=fr&u=\(self.baseUrl)/secur/frontdoor.jsp?sid=\(self.accessToken)&retURL=\(currentUrlString)"
+            } else {
+                urlString = "https://translate.google.com/translate?hl=en&sl=en&tl=fr&u=\(currentUrlString)"
+            }
+            
+            print("RootViewController:translatePage - Translating \(urlString)")
+            
+            if let url = NSURL(string: urlString) {
+                let req = NSURLRequest(url: url as URL)
+                webView?.load(req as URLRequest)
+            }
+        }
+    }
     
     func playSound() {
         guard let url = Bundle.main.url(forResource: "sms-received", withExtension: "wav") else {
@@ -234,7 +286,7 @@ class RootViewController : UIViewController, UIWebViewDelegate
     
     // MARK: - UIWebViewDelegate Functions
     
-    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+    /*func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print("RootViewController:Web view shouldStartLoadwith request \(request.url?.absoluteString ?? "No URL") with navigationType \(navigationType)")
         let docUrl = request.url?.absoluteString
         var showWarning = false
@@ -248,14 +300,52 @@ class RootViewController : UIViewController, UIWebViewDelegate
         
         self.warningButton.isHidden = showWarning
         return true
-    }
+    }*/
     
-    func webViewDidStartLoad(_ webView: UIWebView) {
+    /*func webViewDidStartLoad(_ webView: UIWebView) {
+        self.loadingIndicator.startAnimating()
+    }*/
+    
+    /*func webViewDidFinishLoad(_ webView: UIWebView) {
+        let docUrl = webView.request?.mainDocumentURL?.absoluteString;
+        var showWarning = false
+        //check against the whitelist
+        
+        for url in urlWhitelist {
+            if(docUrl?.hasPrefix(url))! {
+                showWarning = true
+            }
+        }
+        
+        self.warningButton.isHidden = showWarning
+        self.loadingIndicator.stopAnimating()
+    }*/
+    
+    /*func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        print("RootViewController: Webview failed to load anything, error is \(error.localizedDescription)")
+    }*/
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("RootViewController:Web view decidePolicyFor  navigationAction request \(navigationAction.request.url?.absoluteString ?? "No URL") with navigationType \(navigationAction.navigationType)")
+        let docUrl = navigationAction.request.url?.absoluteString
+        var showWarning = false
+        
+        //check against the whitelist
+        for url in urlWhitelist {
+            if(docUrl?.hasPrefix(url))! {
+                showWarning = true
+            }
+        }
+        self.warningButton.isHidden = showWarning
+        decisionHandler(WKNavigationActionPolicy.allow);
+    }
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         self.loadingIndicator.startAnimating()
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        let docUrl = webView.request?.mainDocumentURL?.absoluteString;
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        let docUrl = webView.url?.absoluteString;
         var showWarning = false
         //check against the whitelist
         
@@ -269,7 +359,7 @@ class RootViewController : UIViewController, UIWebViewDelegate
         self.loadingIndicator.stopAnimating()
     }
     
-    func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("RootViewController: Webview failed to load anything, error is \(error.localizedDescription)")
     }
     
