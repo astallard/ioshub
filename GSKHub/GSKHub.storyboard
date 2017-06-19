@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,24 +28,58 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IIa-1j-5Fe">
-                                                <rect key="frame" x="5" y="5" width="20" height="20"/>
+                                                <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="I3A-f7-1gO"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="eGR-s6-Z8V"/>
+                                                    <constraint firstAttribute="height" constant="20" id="yQs-ru-17i"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="20" id="zV0-bp-PCP"/>
+                                                </constraints>
                                                 <color key="color" red="1" green="0.4760972798957761" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </activityIndicatorView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to GSK Hub" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbT-qb-Jiu">
-                                                <rect key="frame" x="0.0" y="5" width="375" height="20"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KtL-XH-3rt" userLabel="Warning Button">
+                                                <rect key="frame" x="43" y="13" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="ZjK-4W-4is"/>
+                                                    <constraint firstAttribute="width" constant="20" id="ogP-QM-sQa"/>
+                                                </constraints>
+                                                <state key="normal" image="warning"/>
+                                            </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jGp-ja-YXF" userLabel="Notification Button">
+                                                <rect key="frame" x="335" y="13" width="25" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="DUg-xJ-wIA"/>
+                                                    <constraint firstAttribute="width" constant="25" id="TAg-jK-zXH"/>
+                                                </constraints>
+                                                <state key="normal" image="notification"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GSK Hub" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbT-qb-Jiu">
+                                                <rect key="frame" x="71" y="18" width="228" height="14"/>
                                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                                 <color key="textColor" red="1" green="0.4760972798957761" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcU-th-ES2" userLabel="Notification Label">
+                                                <rect key="frame" x="345.5" y="20" width="4.5" height="9.5"/>
+                                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="8"/>
+                                                <color key="textColor" red="1" green="0.9998016038682912" blue="0.97944886802061937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="mbT-qb-Jiu" firstAttribute="bottom" secondItem="IIa-1j-5Fe" secondAttribute="bottom" id="0bj-cF-1Ye"/>
-                                            <constraint firstItem="IIa-1j-5Fe" firstAttribute="top" secondItem="8iV-kI-1ms" secondAttribute="top" constant="5" id="5CM-gS-UCX"/>
-                                            <constraint firstItem="mbT-qb-Jiu" firstAttribute="top" secondItem="IIa-1j-5Fe" secondAttribute="top" id="FVY-CS-JKM"/>
-                                            <constraint firstItem="mbT-qb-Jiu" firstAttribute="leading" secondItem="8iV-kI-1ms" secondAttribute="leading" id="Zd6-hv-pA8"/>
-                                            <constraint firstAttribute="trailing" secondItem="mbT-qb-Jiu" secondAttribute="trailing" id="hZX-hw-r0y"/>
-                                            <constraint firstItem="IIa-1j-5Fe" firstAttribute="leading" secondItem="8iV-kI-1ms" secondAttribute="leading" constant="5" id="igQ-93-QjJ"/>
+                                            <constraint firstItem="IIa-1j-5Fe" firstAttribute="top" secondItem="8iV-kI-1ms" secondAttribute="top" constant="15" id="0Sl-Pt-ouF"/>
+                                            <constraint firstItem="XcU-th-ES2" firstAttribute="top" secondItem="8iV-kI-1ms" secondAttribute="top" constant="20" id="2if-kX-Qv8"/>
+                                            <constraint firstItem="jGp-ja-YXF" firstAttribute="leading" secondItem="mbT-qb-Jiu" secondAttribute="trailing" constant="36" id="4ff-vZ-1hu"/>
+                                            <constraint firstItem="jGp-ja-YXF" firstAttribute="top" secondItem="8iV-kI-1ms" secondAttribute="top" constant="13" id="9au-33-O6A"/>
+                                            <constraint firstItem="mbT-qb-Jiu" firstAttribute="leading" secondItem="KtL-XH-3rt" secondAttribute="trailing" constant="8" id="A2k-3F-boF"/>
+                                            <constraint firstAttribute="trailing" secondItem="jGp-ja-YXF" secondAttribute="trailing" constant="15" id="Bdj-VJ-uUB"/>
+                                            <constraint firstItem="KtL-XH-3rt" firstAttribute="leading" secondItem="IIa-1j-5Fe" secondAttribute="trailing" constant="8" id="D6u-Kb-mNo"/>
+                                            <constraint firstItem="KtL-XH-3rt" firstAttribute="top" secondItem="8iV-kI-1ms" secondAttribute="top" constant="13" id="Q4l-Mw-JVa"/>
+                                            <constraint firstAttribute="height" constant="50" id="Qfx-Az-brv"/>
+                                            <constraint firstAttribute="trailing" secondItem="XcU-th-ES2" secondAttribute="trailing" constant="25" id="dI7-rI-WjH"/>
+                                            <constraint firstItem="mbT-qb-Jiu" firstAttribute="centerY" secondItem="8iV-kI-1ms" secondAttribute="centerY" id="mTj-sU-2ye"/>
+                                            <constraint firstItem="IIa-1j-5Fe" firstAttribute="leading" secondItem="8iV-kI-1ms" secondAttribute="leading" constant="15" id="v23-FA-p1Q"/>
                                         </constraints>
                                     </view>
                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dr2-8S-bFw">
@@ -117,7 +152,10 @@
                                     </view>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="8iV-kI-1ms" firstAttribute="leading" secondItem="uJe-Hc-hNg" secondAttribute="leading" id="9zN-hF-zM9"/>
+                                    <constraint firstAttribute="trailing" secondItem="8iV-kI-1ms" secondAttribute="trailing" id="FFO-hs-Rhn"/>
                                     <constraint firstItem="dr2-8S-bFw" firstAttribute="centerY" secondItem="uJe-Hc-hNg" secondAttribute="centerY" id="kzO-Zw-JeM"/>
+                                    <constraint firstItem="8iV-kI-1ms" firstAttribute="top" secondItem="uJe-Hc-hNg" secondAttribute="top" id="uFX-zx-BSx"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -134,25 +172,30 @@
                         <outlet property="homeButton" destination="Si3-TY-gp7" id="S8D-SA-zhz"/>
                         <outlet property="loadingIndicator" destination="IIa-1j-5Fe" id="EMh-xp-c4l"/>
                         <outlet property="nextButton" destination="DhE-1g-IDM" id="fKg-du-iUb"/>
+                        <outlet property="notifcationLabel" destination="XcU-th-ES2" id="Xay-3P-63K"/>
+                        <outlet property="notificationButton" destination="jGp-ja-YXF" id="gta-jQ-e9l"/>
                         <outlet property="prevButton" destination="RLt-Oa-K4B" id="1e9-df-Hcf"/>
                         <outlet property="profileButton" destination="LLL-WO-1Wo" id="YRY-8B-TAy"/>
                         <outlet property="settingsButton" destination="nfY-NY-Nhw" id="64q-ki-rVM"/>
                         <outlet property="statusBarlabel" destination="mbT-qb-Jiu" id="yn7-8P-bTT"/>
                         <outlet property="travelButton" destination="LVt-ZZ-fmM" id="LRp-ns-Cxk"/>
+                        <outlet property="warningButton" destination="KtL-XH-3rt" id="r2g-D5-XUr"/>
                         <outlet property="webView" destination="dr2-8S-bFw" id="cCH-fj-GAZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zm3-oX-znk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45.600000000000001" y="111.99400299850076"/>
+            <point key="canvasLocation" x="65" y="111"/>
         </scene>
     </scenes>
     <resources>
         <image name="back" width="25" height="25"/>
         <image name="home" width="25" height="25"/>
         <image name="next" width="25" height="25"/>
+        <image name="notification" width="25" height="25"/>
         <image name="profile" width="25" height="25"/>
         <image name="settings" width="25" height="25"/>
         <image name="travel" width="25" height="25"/>
+        <image name="warning" width="25" height="25"/>
     </resources>
 </document>

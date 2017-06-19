@@ -25,16 +25,17 @@
 import Foundation
 import UIKit
 import SalesforceSDKCore
+import UserNotifications
 
 // Fill these in when creating a new Connected Application on Force.com 
 
 //DEVELOPMENT
-let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp";
-let OAuthRedirectURI        = "mymobileapp://callback";
+//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp"
+//let OAuthRedirectURI        = "mymobileapp://callback"
 
 //DISTRIBUTION
-//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg==";
-//let OAuthRedirectURI        = "mymobileapp://callback";
+let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg=="
+let OAuthRedirectURI        = "mymobileapp://callback"
 
 class AppDelegate : UIResponder, UIApplicationDelegate
 {
@@ -101,6 +102,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.initializeAppViewState();
         
+        // do we have any push notifications?
+        print("AppDelegate:applicationDidFinishLaunchingWithOptions called.  Launch options are \(launchOptions)")
+        
         //
         // If you wish to register for push notifications, uncomment the line below.  Note that,
         // if you want to receive push notifications from Salesforce, you will also need to
@@ -136,7 +140,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         SFPushNotificationManager.sharedInstance().didRegisterForRemoteNotifications(withDeviceToken: deviceToken)
         if (SFUserAccountManager.sharedInstance().currentUser?.credentials.accessToken != nil) {
             SFPushNotificationManager.sharedInstance().registerForSalesforceNotifications()
-            print("AppDelegate: we've registered for push notifications")
+            print("AppDelegate:didRegisterForRemoteNotificationsWithDeviceToken we've registered for push notifications")
         }
     }
     
@@ -145,7 +149,6 @@ class AppDelegate : UIResponder, UIApplicationDelegate
     {
         // Respond to any push notification registration errors here.
         print("AppDelegate: Push Notifications failed, error is \(error.localizedDescription)")
-
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -162,7 +165,29 @@ class AppDelegate : UIResponder, UIApplicationDelegate
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
-        print("AppDelegate:application didReceiveRemoteNotification userInfo is \(userInfo)")
+        print("AppDelegate:application didReceiveRemoteNotification Notification is \(userInfo)")
+        
+        var aps = userInfo["aps"] as! [String: Any]
+        let alert = aps["alert"] as! String
+        let type = userInfo["Type"] as! String
+        let sfid = userInfo["sfid"] as! String
+        
+        let gskNotification = GSKNotification.init(title: alert, type: type, sfid: sfid)
+        GSKDataManager.shared.gskNotifications.append(gskNotification)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remoteNotification"), object: gskNotification)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("AppDelegate:application didReceiveRemoteNotification fetchCompletionHandler Notification is \(userInfo)")
+
+        var aps = userInfo["aps"] as! [String: Any]
+        let alert = aps["alert"] as! String
+        let type = userInfo["Type"] as! String
+        let sfid = userInfo["SFID"] as! String
+    
+        let gskNotification = GSKNotification.init(title: alert, type: type, sfid: sfid)
+        GSKDataManager.shared.gskNotifications.append(gskNotification)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remoteNotification"), object: gskNotification)
     }
     
     // MARK: - Private methods

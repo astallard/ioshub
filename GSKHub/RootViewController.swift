@@ -25,6 +25,7 @@
 import Foundation
 import UIKit
 import SalesforceSDKCore
+import AVFoundation
 
 class RootViewController : UIViewController, UIWebViewDelegate
 {
@@ -40,18 +41,31 @@ class RootViewController : UIViewController, UIWebViewDelegate
     @IBOutlet weak var travelButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var statusBarlabel: UILabel!
-    
+    @IBOutlet weak var notificationButton: UIButton!
+    @IBOutlet weak var notifcationLabel: UILabel!
+    @IBOutlet weak var warningButton: UIButton!
     
     var baseUrl : String = ""
     var allowExternalURLs : Bool = false
     var accessToken : String = ""
+    
+    var player: AVAudioPlayer?
+    
+    var urlWhitelist = ["https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com", "about:blank"]
+
     
     // MARK: - Lifecycle Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Register for remote notifications
+        // TODO: This should be moved
         SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
+        
+        // Register for internal app notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(remoteNotification), name: NSNotification.Name(rawValue: "remoteNotification"), object: nil)
+
         
         //set the web view delegate
         webView?.delegate = self
@@ -87,6 +101,26 @@ class RootViewController : UIViewController, UIWebViewDelegate
             print("Count not get a valid access token, the user needs to sign in");
         }
         
+    }
+    
+    // MARK: - Internal Notification Functions
+    
+    func remoteNotification(notification: NSNotification) {
+        
+        let gskNotification = notification.object as! GSKNotification
+        
+        if(statusBarlabel != nil) {
+            statusBarlabel.text = "You have a new \(gskNotification.type) Notifcation"
+        }
+        
+        if(notificationButton != nil) {
+            //get the notification count and update the label
+            let count = GSKDataManager.shared.gskNotifications.count;
+            notifcationLabel.text = "\(count)"
+            notificationButton.isHidden = false
+            notifcationLabel.isHidden = false
+            self.playSound()
+        }
     }
     
     
@@ -179,11 +213,40 @@ class RootViewController : UIViewController, UIWebViewDelegate
     }
     
     
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "sms-received", withExtension: "wav") else {
+            print("error")
+            return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            player = try AVAudioPlayer(contentsOf: url)
+            guard let player = player else { return }
+            
+            player.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     // MARK: - UIWebViewDelegate Functions
     
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print("RootViewController:Web view shouldStartLoadwith request \(request.url?.absoluteString ?? "No URL") with navigationType \(navigationType)")
+        let docUrl = request.url?.absoluteString
+        var showWarning = false
         
+        //check against the whitelist
+        for url in urlWhitelist {
+            if(docUrl?.hasPrefix(url))! {
+                showWarning = true
+            }
+        }
+        
+        self.warningButton.isHidden = showWarning
         return true
     }
     
@@ -192,6 +255,17 @@ class RootViewController : UIViewController, UIWebViewDelegate
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {
+        let docUrl = webView.request?.mainDocumentURL?.absoluteString;
+        var showWarning = false
+        //check against the whitelist
+        
+        for url in urlWhitelist {
+            if(docUrl?.hasPrefix(url))! {
+                showWarning = true
+            }
+        }
+        
+        self.warningButton.isHidden = showWarning
         self.loadingIndicator.stopAnimating()
     }
     

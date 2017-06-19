@@ -13,6 +13,9 @@
 		4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C49C1B755242002F9F90 /* RootViewController.swift */; };
 		7516C7371EF0471000F56656 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7516C7361EF0471000F56656 /* InitialViewController.swift */; };
 		7516C7391EF178E900F56656 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7516C7381EF178E800F56656 /* Settings.bundle */; };
+		75E319141EF3CF9D00356CAF /* GSKDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E319131EF3CF9D00356CAF /* GSKDataManager.swift */; };
+		75E319161EF40C8E00356CAF /* GSKNotifcation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E319151EF40C8E00356CAF /* GSKNotifcation.swift */; };
+		75E319191EF427F400356CAF /* sms-received.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75E319181EF427F400356CAF /* sms-received.wav */; };
 		75F2B3A91EF01AE600BB581A /* GSKHub.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */; };
 		75F2B3AB1EF0240200BB581A /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2B3AA1EF0240200BB581A /* UIUtilities.swift */; };
 		78A235BD93AB7D080D67CD51 /* Pods_GSKHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82A29C75280BDF73123F14B4 /* Pods_GSKHub.framework */; };
@@ -30,6 +33,9 @@
 		4FF12F8A1DCA91F5004D9EF9 /* GSKHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GSKHub.entitlements; sourceTree = "<group>"; };
 		7516C7361EF0471000F56656 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		7516C7381EF178E800F56656 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		75E319131EF3CF9D00356CAF /* GSKDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSKDataManager.swift; sourceTree = "<group>"; };
+		75E319151EF40C8E00356CAF /* GSKNotifcation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSKNotifcation.swift; sourceTree = "<group>"; };
+		75E319181EF427F400356CAF /* sms-received.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sms-received.wav"; sourceTree = "<group>"; };
 		75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GSKHub.storyboard; sourceTree = "<group>"; };
 		75F2B3AA1EF0240200BB581A /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		762732C14CFE40A989C3AD70 /* Pods-GSKHub.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GSKHub.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GSKHub/Pods-GSKHub.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,6 +86,7 @@
 		4FD6C4771B754AF1002F9F90 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				75E319171EF427DE00356CAF /* Sounds */,
 				4F36A3661DC175BD00FEACD7 /* Images.xcassets */,
 				4FD6C4781B754AF1002F9F90 /* Info.plist */,
 				75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */,
@@ -90,12 +97,14 @@
 		4FD6C4A11B755265002F9F90 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				4FD6C49A1B755242002F9F90 /* Bridging-Header.h */,
-				4FD6C49C1B755242002F9F90 /* RootViewController.swift */,
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
-				4F393A281C3C8BCD00B3EA13 /* main.swift */,
-				75F2B3AA1EF0240200BB581A /* UIUtilities.swift */,
+				75E319131EF3CF9D00356CAF /* GSKDataManager.swift */,
+				75E319151EF40C8E00356CAF /* GSKNotifcation.swift */,
 				7516C7361EF0471000F56656 /* InitialViewController.swift */,
+				4FD6C49C1B755242002F9F90 /* RootViewController.swift */,
+				75F2B3AA1EF0240200BB581A /* UIUtilities.swift */,
+				4F393A281C3C8BCD00B3EA13 /* main.swift */,
+				4FD6C49A1B755242002F9F90 /* Bridging-Header.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -106,6 +115,14 @@
 				82A29C75280BDF73123F14B4 /* Pods_GSKHub.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75E319171EF427DE00356CAF /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				75E319181EF427F400356CAF /* sms-received.wav */,
+			);
+			name = Sounds;
 			sourceTree = "<group>";
 		};
 		DDFDDF0A29E4BDD114B51BBC /* Pods */ = {
@@ -156,6 +173,9 @@
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 1;
 							};
@@ -192,6 +212,7 @@
 				75F2B3A91EF01AE600BB581A /* GSKHub.storyboard in Resources */,
 				7516C7391EF178E900F56656 /* Settings.bundle in Resources */,
 				4F36A3671DC175BD00FEACD7 /* Images.xcassets in Resources */,
+				75E319191EF427F400356CAF /* sms-received.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +273,8 @@
 			files = (
 				7516C7371EF0471000F56656 /* InitialViewController.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
+				75E319141EF3CF9D00356CAF /* GSKDataManager.swift in Sources */,
+				75E319161EF40C8E00356CAF /* GSKNotifcation.swift in Sources */,
 				4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				75F2B3AB1EF0240200BB581A /* UIUtilities.swift in Sources */,
@@ -360,7 +383,7 @@
 				DEVELOPMENT_TEAM = 4WQ2T93P22;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = GSKHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforce.internal.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -382,7 +405,7 @@
 				DEVELOPMENT_TEAM = 4WQ2T93P22;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = GSKHub/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforce.internal.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

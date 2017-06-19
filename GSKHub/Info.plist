@@ -2,15 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Photos are great for profile images and so we can easily add your receipts to your expenses.  If we could use your camera that would be great.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photos are great for profile images and so we can easily add your receipts to your expenses.  It would be great if we could access your library.</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -37,8 +28,22 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Photos are great for profile images and so we can easily add your receipts to your expenses.  If we could use your camera that would be great.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photos are great for profile images and so we can easily add your receipts to your expenses.  It would be great if we could access your library.</string>
 	<key>SFDCOAuthLoginHost</key>
 	<string>isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
