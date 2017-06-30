@@ -13,8 +13,9 @@
 		4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD6C49C1B755242002F9F90 /* RootViewController.swift */; };
 		7516C7371EF0471000F56656 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7516C7361EF0471000F56656 /* InitialViewController.swift */; };
 		7516C7391EF178E900F56656 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7516C7381EF178E800F56656 /* Settings.bundle */; };
+		75BFD3821F057BF0007071A5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75BFD3811F057BF0007071A5 /* UIButtonExtension.swift */; };
 		75E319141EF3CF9D00356CAF /* GSKDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E319131EF3CF9D00356CAF /* GSKDataManager.swift */; };
-		75E319161EF40C8E00356CAF /* GSKNotifcation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E319151EF40C8E00356CAF /* GSKNotifcation.swift */; };
+		75E319161EF40C8E00356CAF /* GSKNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E319151EF40C8E00356CAF /* GSKNotification.swift */; };
 		75E319191EF427F400356CAF /* sms-received.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75E319181EF427F400356CAF /* sms-received.wav */; };
 		75F2B3A91EF01AE600BB581A /* GSKHub.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */; };
 		75F2B3AB1EF0240200BB581A /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F2B3AA1EF0240200BB581A /* UIUtilities.swift */; };
@@ -33,8 +34,9 @@
 		4FF12F8A1DCA91F5004D9EF9 /* GSKHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GSKHub.entitlements; sourceTree = "<group>"; };
 		7516C7361EF0471000F56656 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		7516C7381EF178E800F56656 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		75BFD3811F057BF0007071A5 /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		75E319131EF3CF9D00356CAF /* GSKDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSKDataManager.swift; sourceTree = "<group>"; };
-		75E319151EF40C8E00356CAF /* GSKNotifcation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSKNotifcation.swift; sourceTree = "<group>"; };
+		75E319151EF40C8E00356CAF /* GSKNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSKNotification.swift; sourceTree = "<group>"; };
 		75E319181EF427F400356CAF /* sms-received.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "sms-received.wav"; sourceTree = "<group>"; };
 		75F2B3A81EF01AE600BB581A /* GSKHub.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = GSKHub.storyboard; sourceTree = "<group>"; };
 		75F2B3AA1EF0240200BB581A /* UIUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
@@ -99,9 +101,10 @@
 			children = (
 				4FD6C4791B754AF1002F9F90 /* AppDelegate.swift */,
 				75E319131EF3CF9D00356CAF /* GSKDataManager.swift */,
-				75E319151EF40C8E00356CAF /* GSKNotifcation.swift */,
+				75E319151EF40C8E00356CAF /* GSKNotification.swift */,
 				7516C7361EF0471000F56656 /* InitialViewController.swift */,
 				4FD6C49C1B755242002F9F90 /* RootViewController.swift */,
+				75BFD3811F057BF0007071A5 /* UIButtonExtension.swift */,
 				75F2B3AA1EF0240200BB581A /* UIUtilities.swift */,
 				4F393A281C3C8BCD00B3EA13 /* main.swift */,
 				4FD6C49A1B755242002F9F90 /* Bridging-Header.h */,
@@ -272,9 +275,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7516C7371EF0471000F56656 /* InitialViewController.swift in Sources */,
+				75BFD3821F057BF0007071A5 /* UIButtonExtension.swift in Sources */,
 				4FD6C47A1B754AF1002F9F90 /* AppDelegate.swift in Sources */,
 				75E319141EF3CF9D00356CAF /* GSKDataManager.swift in Sources */,
-				75E319161EF40C8E00356CAF /* GSKNotifcation.swift in Sources */,
+				75E319161EF40C8E00356CAF /* GSKNotification.swift in Sources */,
 				4FD6C49F1B755242002F9F90 /* RootViewController.swift in Sources */,
 				4F393A291C3C8BCD00B3EA13 /* main.swift in Sources */,
 				75F2B3AB1EF0240200BB581A /* UIUtilities.swift in Sources */,
@@ -385,6 +389,49 @@
 				INFOPLIST_FILE = GSKHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DSQLITE_HAS_CODEC",
+					"-DSQLITE_TEMP_STORE=2",
+					"-DSQLITE_SOUNDEX",
+					"-DSQLITE_THREADSAFE",
+					"-DSQLITE_ENABLE_RTREE",
+					"-DSQLITE_ENABLE_STAT3",
+					"-DSQLITE_ENABLE_STAT4",
+					"-DSQLITE_ENABLE_COLUMN_METADATA",
+					"-DSQLITE_ENABLE_MEMORY_MANAGEMENT",
+					"-DSQLITE_ENABLE_LOAD_EXTENSION",
+					"-DSQLITE_ENABLE_FTS4",
+					"-DSQLITE_ENABLE_FTS4_UNICODE61",
+					"-DSQLITE_ENABLE_FTS3_PARENTHESIS",
+					"-DSQLITE_ENABLE_UNLOCK_NOTIFY",
+					"-DSQLITE_ENABLE_JSON1",
+					"-DSQLITE_ENABLE_FTS5",
+					"-DSQLCIPHER_CRYPTO_CC",
+					"$(inherited)",
+					"$(inherited)",
+					"-DSQLITE_HAS_CODEC",
+					"-DFMDatabase=SF_FMDatabase",
+					"-DFMStatement=SF_FMStatement",
+					"-DFMDatabasePool=SF_FMDatabasePool",
+					"-DFMDatabaseQueue=SF_FMDatabaseQueue",
+					"-DFMResultSet=SF_FMResultSet",
+					"-DFMDBBlockSQLiteCallBackFunction=SF_FMDBBlockSQLiteCallBackFunction",
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CocoaLumberjack/CocoaLumberjack.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SQLCipher/SQLCipher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SalesforceAnalytics/SalesforceAnalytics.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SalesforceSDKCore/SalesforceSDKCore.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SmartStore/SmartStore.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SmartSync/SmartSync.framework/Headers\"",
+					"-Wno-ambiguous-macro",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforce.internal.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b9a86a98-3dd0-49ec-ba52-b67fd5724ab8";
@@ -407,6 +454,49 @@
 				INFOPLIST_FILE = GSKHub/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-DSQLITE_HAS_CODEC",
+					"-DSQLITE_TEMP_STORE=2",
+					"-DSQLITE_SOUNDEX",
+					"-DSQLITE_THREADSAFE",
+					"-DSQLITE_ENABLE_RTREE",
+					"-DSQLITE_ENABLE_STAT3",
+					"-DSQLITE_ENABLE_STAT4",
+					"-DSQLITE_ENABLE_COLUMN_METADATA",
+					"-DSQLITE_ENABLE_MEMORY_MANAGEMENT",
+					"-DSQLITE_ENABLE_LOAD_EXTENSION",
+					"-DSQLITE_ENABLE_FTS4",
+					"-DSQLITE_ENABLE_FTS4_UNICODE61",
+					"-DSQLITE_ENABLE_FTS3_PARENTHESIS",
+					"-DSQLITE_ENABLE_UNLOCK_NOTIFY",
+					"-DSQLITE_ENABLE_JSON1",
+					"-DSQLITE_ENABLE_FTS5",
+					"-DSQLCIPHER_CRYPTO_CC",
+					"$(inherited)",
+					"$(inherited)",
+					"-DSQLITE_HAS_CODEC",
+					"-DFMDatabase=SF_FMDatabase",
+					"-DFMStatement=SF_FMStatement",
+					"-DFMDatabasePool=SF_FMDatabasePool",
+					"-DFMDatabaseQueue=SF_FMDatabaseQueue",
+					"-DFMResultSet=SF_FMResultSet",
+					"-DFMDBBlockSQLiteCallBackFunction=SF_FMDBBlockSQLiteCallBackFunction",
+					"$(inherited)",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/CocoaLumberjack/CocoaLumberjack.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SQLCipher/SQLCipher.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SalesforceAnalytics/SalesforceAnalytics.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SalesforceSDKCore/SalesforceSDKCore.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SmartStore/SmartStore.framework/Headers\"",
+					"-iquote",
+					"\"$PODS_CONFIGURATION_BUILD_DIR/SmartSync/SmartSync.framework/Headers\"",
+					"-Wno-ambiguous-macro",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.salesforce.internal.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "20a91d09-1308-4257-ab78-e1878b4c9d0f";

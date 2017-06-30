@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SalesforceSDKCore
 
 class GSKDataManager {
     

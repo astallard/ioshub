@@ -30,12 +30,12 @@ import UserNotifications
 // Fill these in when creating a new Connected Application on Force.com 
 
 //DEVELOPMENT
-//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp"
-//let OAuthRedirectURI        = "mymobileapp://callback"
+let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP2hEu95iNOEkHVbPXIZM1nV9_gfPe5k6CB8pA_4rpBi4T9J7NZKXlNauqBvp"
+let OAuthRedirectURI        = "mymobileapp://callback"
 
 //DISTRIBUTION
-let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg=="
-let OAuthRedirectURI        = "mymobileapp://callback"
+//let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg=="
+//let OAuthRedirectURI        = "mymobileapp://callback"
 
 class AppDelegate : UIResponder, UIApplicationDelegate
 {
@@ -103,7 +103,7 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         self.initializeAppViewState();
         
         // do we have any push notifications?
-        print("AppDelegate:applicationDidFinishLaunchingWithOptions called.  Launch options are \(launchOptions)")
+        //print("AppDelegate:applicationDidFinishLaunchingWithOptions called.  Launch options are \(launchOptions")
         
         //
         // If you wish to register for push notifications, uncomment the line below.  Note that,
@@ -169,25 +169,30 @@ class AppDelegate : UIResponder, UIApplicationDelegate
         
         var aps = userInfo["aps"] as! [String: Any]
         let alert = aps["alert"] as! String
-        let type = userInfo["Type"] as! String
-        let sfid = userInfo["sfid"] as! String
+        let nType = userInfo["Type"] as! String
+        let actionLink = userInfo["ActionLink"] as! String
+        let link = userInfo["Link"] as! String
         
-        let gskNotification = GSKNotification.init(title: alert, type: type, sfid: sfid)
+        let gskNotification = GSKNotification.init(title: alert, type: nType, actionLink: actionLink, link: link)
         GSKDataManager.shared.gskNotifications.append(gskNotification)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remoteNotification"), object: gskNotification)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         print("AppDelegate:application didReceiveRemoteNotification fetchCompletionHandler Notification is \(userInfo)")
-
+        
         var aps = userInfo["aps"] as! [String: Any]
         let alert = aps["alert"] as! String
-        let type = userInfo["Type"] as! String
-        let sfid = userInfo["SFID"] as! String
-    
-        let gskNotification = GSKNotification.init(title: alert, type: type, sfid: sfid)
+        let nType = userInfo["Type"] as! String
+        let actionLink = userInfo["ActionLink"] as! String
+        let link = userInfo["Link"] as! String
+        
+        let gskNotification = GSKNotification.init(title: alert, type: nType, actionLink: actionLink, link: link)
         GSKDataManager.shared.gskNotifications.append(gskNotification)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "remoteNotification"), object: gskNotification)
+        completionHandler(UIBackgroundFetchResult.init(rawValue: 1)!)
+        return
+        
     }
     
     // MARK: - Private methods

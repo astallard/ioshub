@@ -12,22 +12,25 @@ class GSKNotification : CustomStringConvertible
 {
     var title : String
     var type : String
-    var sfid : String
+    var actionLink : String
+    var link : String
     
     init() {
         title = ""
         type = ""
-        sfid = ""
+        actionLink = ""
+        link = ""
     }
     
-    init(title: String, type: String, sfid: String) {
+    init(title: String, type: String, actionLink: String, link: String) {
         self.title = title
         self.type = type
-        self.sfid = sfid
+        self.actionLink = actionLink
+        self.link = link
     }
     
     var description: String {
-        return "GSKNotification - title: \(title) type: \(type) sfid: \(sfid)"
+        return "GSKNotification - title: \(title) type: \(type) actionLink: \(actionLink) link: \(link)"
     }
     
 }

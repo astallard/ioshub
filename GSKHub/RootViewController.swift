@@ -28,7 +28,7 @@ import SalesforceSDKCore
 import AVFoundation
 import WebKit
 
-class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
+class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate, SFRestDelegate
 {
     // MARK: - UI fields
     
@@ -46,11 +46,12 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
     @IBOutlet weak var travelButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var statusBarlabel: UILabel!
+    @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var notificationButton: UIButton!
-    @IBOutlet weak var notifcationLabel: UILabel!
     @IBOutlet weak var warningButton: UIButton!
     
     var webView : WKWebView!
+    var refreshControl : UIRefreshControl!
     
     var baseUrl : String = ""
     var allowExternalURLs : Bool = false
@@ -59,7 +60,6 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
     var player: AVAudioPlayer?
     
     var urlWhitelist = ["https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com", "about:blank"]
-
     
     // MARK: - Lifecycle Functions
     
@@ -72,6 +72,9 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //To Do 
+        reloadButton.isHidden = true
         
         // Register for remote notifications
         // TODO: This should be moved
@@ -92,6 +95,10 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
         webPlaceholderView.addConstraint(widthConstraint);
         webPlaceholderView.addConstraint(heightConstraint);
 
+        //configure the refresh for the web view
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.refreshWebViewFromController), for: UIControlEvents.valueChanged)
+        webView.scrollView.insertSubview(refreshControl, at: 0)
         
         //set the loading indicator to hidden
         loadingIndicator.stopAnimating()
@@ -104,11 +111,20 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
         } else {
             self.baseUrl = "https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec"
         }
-
+        
+        let authManager = SFAuthenticationManager.shared()
+        if(authManager.haveValidSession) {
+            print("RootViewController:BANANAS we have a valid session")
+        }
+        
+        
         //get the access token and set the home page to the current community
         if let sfAccessToken = SFAuthenticationManager.shared().coordinator.credentials.accessToken {
             self.accessToken = sfAccessToken
-                        
+            
+            print("RootViewController:viewDidLoad() - Access token is \(accessToken) and user is \((SFUserAccountManager.sharedInstance().currentUser?.fullName))");
+
+            
             //let urlString = "https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/secur/frontdoor.jsp?sid=" + self.accessToken + "&retURL=https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/s/";
             let urlString = "\(self.baseUrl)/secur/frontdoor.jsp?sid=\(self.accessToken)&retURL=\(self.baseUrl)/s/"
             
@@ -132,20 +148,35 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
         
         let gskNotification = notification.object as! GSKNotification
         
+        // update the status label text
         if(statusBarlabel != nil) {
             statusBarlabel.text = "You have a new \(gskNotification.type) Notifcation"
+            self.playSound()
+            
         }
         
         if(notificationButton != nil) {
+            
+            DispatchQueue.main.async() {
+                self.notificationButton.shake()
+            }
+            
             //get the notification count and update the label
-            let count = GSKDataManager.shared.gskNotifications.count;
-            notifcationLabel.text = "\(count)"
-            notificationButton.isHidden = false
-            notifcationLabel.isHidden = false
-            self.playSound()
+            let userId = SFUserAccountManager.sharedInstance().currentUser?.idData.userId;
+            let request = SFRestAPI.sharedInstance().request(forQuery: "SELECT count() FROM Notification__c WHERE To__c = '" + userId! + "' AND Status__c != 'Done'")
+            SFRestAPI.sharedInstance().send(request, fail: {(error:Error?) in
+                print("RootViewController:remoteNotification - failed \(error?.localizedDescription ?? "No error supplied")");
+            }, complete: { response in
+                print("RootViewController:remoteNotification - BANANAS success");
+                let responseDictionary = response as! NSDictionary
+                let number = responseDictionary["totalSize"]
+                DispatchQueue.main.async() {
+                    UIApplication.shared.applicationIconBadgeNumber = number as! Int
+                    self.notificationButton.isHidden = false
+                }
+            })
         }
     }
-    
     
     // MARK: - UI Callback Functions
 
@@ -190,6 +221,16 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
         showTravelPage()
     }
     
+    @IBAction func notificationButtonTouchUpInside(_ sender: Any) {
+        print("RootViewController:notificationButtonTouchUpInside called")
+        showNotificationsPage()
+    }
+
+    @IBAction func reloadButtonTouchUpInside(_ sender: Any) {
+        print("RootViewController:reloadButtonTouchUpInside called")
+        refreshWebView()
+    }
+    
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -197,6 +238,21 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
     
     // MARK: - Application Functions
 
+    func refreshWebViewFromController(sender: UIRefreshControl) {
+        print("RootViewController:refreshWebViewFromController called")
+        sender.endRefreshing()
+        refreshWebView()
+    }
+    
+    
+    func refreshWebView() {
+        guard let webView = self.webView else {
+            return
+        }
+        webView.reloadFromOrigin()
+    }
+    
+    
     func showHowPage() {
         let urlString = "\(self.baseUrl)/s/"
         
@@ -234,6 +290,15 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
     
     func showTravelPage() {
         let urlString = "\(baseUrl)/s/travel-and-expenses"
+        
+        if let url = NSURL(string: urlString) {
+            let req = NSURLRequest(url: url as URL)
+            webView?.load(req as URLRequest)
+        }
+    }
+        
+    func showNotificationsPage() {
+        let urlString = "\(baseUrl)/s/my-notifications"
         
         if let url = NSURL(string: urlString) {
             let req = NSURLRequest(url: url as URL)
@@ -325,17 +390,50 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate
         print("RootViewController: Webview failed to load anything, error is \(error.localizedDescription)")
     }*/
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        print("RootViewController:Web view decidePolicyFor  navigationAction request \(navigationAction.request.url?.absoluteString ?? "No URL") with navigationType \(navigationAction.navigationType)")
-        let docUrl = navigationAction.request.url?.absoluteString
-        var showWarning = false
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        print("RootViewController:Web view createWebViewWith  configuration \(navigationAction.request.url?.absoluteString ?? "No URL") with navigationType \(navigationAction.navigationType)")
         
-        //check against the whitelist
-        for url in urlWhitelist {
-            if(docUrl?.hasPrefix(url))! {
-                showWarning = true
+        
+        if navigationAction.targetFrame == nil {
+            let url = navigationAction.request.url
+            
+            if (url?.absoluteString.hasPrefix("mailto:"))! || (url?.absoluteString.hasPrefix("tel:"))! {
+                if(UIApplication.shared.canOpenURL(url!)) {
+                    UIApplication.shared.open(url!, options: [UIApplicationOpenURLOptionUniversalLinksOnly:true], completionHandler: nil)
+                }
+            } else {
+                webView.load(navigationAction.request)
             }
         }
+        return nil
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        print("RootViewController:Web view decidePolicyFor  navigationAction request \(navigationAction.request.url?.absoluteString ?? "No URL") with navigationType \(navigationAction.navigationType)")
+        var showWarning = false
+        
+        
+        // make sure we have a url
+        if let url = navigationAction.request.url {
+            // check to see if it for the telephone or email
+            if url.scheme == "tel" || url.scheme == "mailto" {
+                if UIApplication.shared.canOpenURL(url) {
+                    // yes, so let the OS open it
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            } else {
+                // it's a url so check against the whitelist
+                for wlUrl in urlWhitelist {
+                    if url.absoluteString.hasPrefix(wlUrl) {
+                        // it's not on the whitelist so show the warning icon
+                        showWarning = true
+                    }
+                }
+            }
+            
+        }
+        // show the warning and allow the url
         self.warningButton.isHidden = showWarning
         decisionHandler(WKNavigationActionPolicy.allow);
     }
