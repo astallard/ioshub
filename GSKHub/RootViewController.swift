@@ -27,6 +27,7 @@ import UIKit
 import SalesforceSDKCore
 import AVFoundation
 import WebKit
+import QuickLook
 
 class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate, SFRestDelegate
 {
@@ -40,7 +41,7 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
     @IBOutlet weak var prevButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
-    @IBOutlet weak var profileButton: UIButton!
+    @IBOutlet weak var appsButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var translateButton: UIButton!
     @IBOutlet weak var travelButton: UIButton!
@@ -52,6 +53,7 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
     
     var webView : WKWebView!
     var refreshControl : UIRefreshControl!
+    var appsMenu : UIAlertController!
     
     var baseUrl : String = ""
     var allowExternalURLs : Bool = false
@@ -75,6 +77,9 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
         
         //To Do 
         reloadButton.isHidden = true
+        
+        // create the apps menu
+        self.createAppsMenu();
         
         // Register for remote notifications
         // TODO: This should be moved
@@ -200,9 +205,9 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
         showHowPage()
     }
     
-    @IBAction func profileButtonTouchUpInside(_ sender: Any) {
-        print("RootViewController:profileButtonTouchUpInside called")
-        showProfilePage()
+    @IBAction func appsButtonTouchUpInside(_ sender: Any) {
+        print("RootViewController:appsButtonTouchUpInside called")
+        showAppsMenu()
     }
     
     @IBAction func settingsButtonTouchUpInside(_ sender: Any) {
@@ -262,17 +267,59 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
         }
     }
     
-    func showProfilePage() {
-        if let userId = SFUserAccountManager.sharedInstance().currentUser?.idData.userId {
-            let urlString = "\(self.baseUrl)/s/profile/\(userId)"
+    func createAppsMenu() {
+        // show the apps action sheet
+        print("RootViewController::showAppsMenu() Called.")
+        
+        appsMenu = UIAlertController(title: nil, message: "GSK Hub Apps Menu", preferredStyle: .actionSheet)
+        appsMenu.view.tintColor = UIColor.orange
+
+        
+        let myProfileAction = UIAlertAction(title: "My Profile", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - myProfileAction")
+            self.showProfilePage()
+        })
+
+        let mySettingsAction = UIAlertAction(title: "My Settings", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - mySettingsAction")
+            self.showSettingsPage()
+        })
+        
+        let logoutAction = UIAlertAction(title: "Log Out", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - logout")
             
-            if let url = NSURL(string: urlString) {
-                let req = NSURLRequest(url: url as URL)
-                webView?.load(req as URLRequest)
-            }
-        } else {
-            print("RootViewController:showProfilePage - could not get user Id")
-        }
+            let logoutAlert = UIAlertController(title: "Confirm Log Out", message: "This action will log you out of the hub.  Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+            logoutAlert.view.tintColor = UIColor.orange
+            
+            logoutAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { action in
+                print("RootViewController:showAppsMenu() - i was hasty don't log me out.")
+            }))
+
+            logoutAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+                print("RootViewController:showAppsMenu() - confirm logout")
+                SFAuthenticationManager.shared().logout()
+                self.showHowPage();
+            }))
+            
+            self.present(logoutAlert, animated: true, completion: nil)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - cancelAction")
+        })
+        
+        appsMenu.addAction(myProfileAction)
+        appsMenu.addAction(mySettingsAction)
+        appsMenu.addAction(logoutAction)
+        appsMenu.addAction(cancelAction)
+    }
+    
+    func showAppsMenu() {
+        self.present(appsMenu, animated: true, completion: nil)
     }
     
     func showSettingsPage() {
@@ -285,6 +332,19 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
             }
         } else {
             print("RootViewController:showSettingsPage - could not get user Id")
+        }
+    }
+    
+    func showProfilePage() {
+        if let userId = SFUserAccountManager.sharedInstance().currentUser?.idData.userId {
+            let urlString = "\(baseUrl)/s/profile/\(userId)"
+            
+            if let url = NSURL(string: urlString) {
+                let req = NSURLRequest(url: url as URL)
+                webView?.load(req as URLRequest)
+            }
+        } else {
+            print("RootViewController:showProfilePage - could not get user Id")
         }
     }
     
@@ -348,47 +408,6 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
             print(error.localizedDescription)
         }
     }
-    
-    // MARK: - UIWebViewDelegate Functions
-    
-    /*func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print("RootViewController:Web view shouldStartLoadwith request \(request.url?.absoluteString ?? "No URL") with navigationType \(navigationType)")
-        let docUrl = request.url?.absoluteString
-        var showWarning = false
-        
-        //check against the whitelist
-        for url in urlWhitelist {
-            if(docUrl?.hasPrefix(url))! {
-                showWarning = true
-            }
-        }
-        
-        self.warningButton.isHidden = showWarning
-        return true
-    }*/
-    
-    /*func webViewDidStartLoad(_ webView: UIWebView) {
-        self.loadingIndicator.startAnimating()
-    }*/
-    
-    /*func webViewDidFinishLoad(_ webView: UIWebView) {
-        let docUrl = webView.request?.mainDocumentURL?.absoluteString;
-        var showWarning = false
-        //check against the whitelist
-        
-        for url in urlWhitelist {
-            if(docUrl?.hasPrefix(url))! {
-                showWarning = true
-            }
-        }
-        
-        self.warningButton.isHidden = showWarning
-        self.loadingIndicator.stopAnimating()
-    }*/
-    
-    /*func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        print("RootViewController: Webview failed to load anything, error is \(error.localizedDescription)")
-    }*/
     
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {

@@ -96,7 +96,7 @@
                                         <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="RtS-Uj-gKA">
-                                                <rect key="frame" x="12.5" y="10" width="350" height="30"/>
+                                                <rect key="frame" x="9" y="10" width="357" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLt-Oa-K4B">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
@@ -125,22 +125,22 @@
                                                             <action selector="homeButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="6i0-Ya-P2U"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLL-WO-1Wo">
-                                                        <rect key="frame" x="195" y="0.0" width="25" height="30"/>
-                                                        <state key="normal" image="profile"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LLL-WO-1Wo" userLabel="Apps Button">
+                                                        <rect key="frame" x="195" y="0.0" width="32" height="30"/>
+                                                        <state key="normal" image="AppsButtonImage"/>
                                                         <connections>
-                                                            <action selector="profileButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="ohG-fj-gVf"/>
+                                                            <action selector="appsButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchDragInside" id="ab2-NQ-xVJ"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cs-5S-TEd" userLabel="Translate Button">
-                                                        <rect key="frame" x="260" y="0.0" width="25" height="30"/>
+                                                        <rect key="frame" x="267" y="0.0" width="25" height="30"/>
                                                         <state key="normal" image="translate"/>
                                                         <connections>
                                                             <action selector="translateButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="afv-6z-UAU"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LVt-ZZ-fmM" userLabel="Travel Button">
-                                                        <rect key="frame" x="325" y="0.0" width="25" height="30"/>
+                                                        <rect key="frame" x="332" y="0.0" width="25" height="30"/>
                                                         <state key="normal" image="travel"/>
                                                         <connections>
                                                             <action selector="travelButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="c1b-hg-hGm"/>
@@ -173,13 +173,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="appsButton" destination="LLL-WO-1Wo" id="BRw-dd-Hds"/>
                         <outlet property="controlView" destination="itg-vc-544" id="WiO-Iv-cdm"/>
                         <outlet property="homeButton" destination="Si3-TY-gp7" id="S8D-SA-zhz"/>
                         <outlet property="loadingIndicator" destination="IIa-1j-5Fe" id="EMh-xp-c4l"/>
                         <outlet property="nextButton" destination="DhE-1g-IDM" id="fKg-du-iUb"/>
                         <outlet property="notificationButton" destination="jGp-ja-YXF" id="gta-jQ-e9l"/>
                         <outlet property="prevButton" destination="RLt-Oa-K4B" id="1e9-df-Hcf"/>
-                        <outlet property="profileButton" destination="LLL-WO-1Wo" id="YRY-8B-TAy"/>
                         <outlet property="reloadButton" destination="906-Ic-wyF" id="Yt4-pE-TRr"/>
                         <outlet property="statusBarlabel" destination="mbT-qb-Jiu" id="yn7-8P-bTT"/>
                         <outlet property="translateButton" destination="3Cs-5S-TEd" id="5j0-yM-xMi"/>
@@ -194,11 +194,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppsButtonImage" width="32" height="32"/>
         <image name="back" width="25" height="25"/>
         <image name="home" width="25" height="25"/>
         <image name="next" width="25" height="25"/>
         <image name="notification" width="25" height="25"/>
-        <image name="profile" width="25" height="25"/>
         <image name="reload" width="25" height="25"/>
         <image name="translate" width="25" height="25"/>
         <image name="travel" width="25" height="25"/>
