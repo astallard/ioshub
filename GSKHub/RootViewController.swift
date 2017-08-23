@@ -33,9 +33,6 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
 {
     // MARK: - UI fields
     
-    //@IBOutlet weak var webView: UIWebView!
-
-    
     @IBOutlet weak var webPlaceholderView: UIView!
     @IBOutlet weak var controlView: UIView!
     @IBOutlet weak var prevButton: UIButton!
@@ -81,10 +78,6 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
         // create the apps menu
         self.createAppsMenu();
         
-        // Register for remote notifications
-        // TODO: This should be moved
-        SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
-        
         // Register for internal app notifications
         NotificationCenter.default.addObserver(self, selector: #selector(remoteNotification), name: NSNotification.Name(rawValue: "remoteNotification"), object: nil)
 
@@ -122,13 +115,11 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
             print("RootViewController:BANANAS we have a valid session")
         }
         
-        
         //get the access token and set the home page to the current community
         if let sfAccessToken = SFAuthenticationManager.shared().coordinator.credentials.accessToken {
             self.accessToken = sfAccessToken
             
-            print("RootViewController:viewDidLoad() - Access token is \(accessToken) and user is \((SFUserAccountManager.sharedInstance().currentUser?.fullName))");
-
+            print("RootViewController:viewDidLoad() - Access token is \(accessToken) and user is \((SFUserAccountManager.sharedInstance().currentUser?.fullName) ?? "Not Set")");
             
             //let urlString = "https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/secur/frontdoor.jsp?sid=" + self.accessToken + "&retURL=https://isvsi-14ddd2ecd93-15167bf933-15bd851b0ad.force.com/ec/s/";
             let urlString = "\(self.baseUrl)/secur/frontdoor.jsp?sid=\(self.accessToken)&retURL=\(self.baseUrl)/s/"
@@ -268,23 +259,39 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
     }
     
     func createAppsMenu() {
-        // show the apps action sheet
-        print("RootViewController::showAppsMenu() Called.")
+        print("RootViewController::createAppsMenu() Called.")
         
-        appsMenu = UIAlertController(title: nil, message: "GSK Hub Apps Menu", preferredStyle: .actionSheet)
-        appsMenu.view.tintColor = UIColor.orange
-
+        self.appsMenu = UIAlertController(title: nil, message: "GSK Hub Apps Menu", preferredStyle: .actionSheet)
+        self.appsMenu.view.tintColor = UIColor.orange
         
         let myProfileAction = UIAlertAction(title: "My Profile", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("RootViewController:showAppsMenu() - myProfileAction")
             self.showProfilePage()
         })
-
+        
         let mySettingsAction = UIAlertAction(title: "My Settings", style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             print("RootViewController:showAppsMenu() - mySettingsAction")
             self.showSettingsPage()
+        })
+        
+        let myChatterAction = UIAlertAction(title: "Let's Talk", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - myChatterAction")
+            self.showChatterPage()
+        })
+        
+        let myNotificationsAction = UIAlertAction(title: "To Do", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - myNotificationsAction")
+            self.showNotificationsPage()
+        })
+        
+        let myNewsAction = UIAlertAction(title: "To Know", style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            print("RootViewController:showAppsMenu() - myNewsAction")
+            self.showNewsPage()
         })
         
         let logoutAction = UIAlertAction(title: "Log Out", style: .default, handler: {
@@ -297,7 +304,7 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
             logoutAlert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: { action in
                 print("RootViewController:showAppsMenu() - i was hasty don't log me out.")
             }))
-
+            
             logoutAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
                 print("RootViewController:showAppsMenu() - confirm logout")
                 SFAuthenticationManager.shared().logout()
@@ -312,15 +319,32 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
             print("RootViewController:showAppsMenu() - cancelAction")
         })
         
-        appsMenu.addAction(myProfileAction)
-        appsMenu.addAction(mySettingsAction)
-        appsMenu.addAction(logoutAction)
-        appsMenu.addAction(cancelAction)
+        self.appsMenu.addAction(myProfileAction)
+        self.appsMenu.addAction(mySettingsAction)
+        self.appsMenu.addAction(myChatterAction)
+        self.appsMenu.addAction(myNotificationsAction)
+        self.appsMenu.addAction(myNewsAction)
+        self.appsMenu.addAction(logoutAction)
+        self.appsMenu.addAction(cancelAction)
     }
     
     func showAppsMenu() {
-        self.present(appsMenu, animated: true, completion: nil)
+        // show the apps action sheet
+        print("RootViewController::showAppsMenu() Called.")
+        
+        if let popoverController = self.appsMenu.popoverPresentationController {
+            print("RootViewController:showAppsMenu() - on an ipad so configuring the pop over")
+            popoverController.sourceView = self.view
+            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.permittedArrowDirections = []
+        }
+        
+        self.present(self.appsMenu, animated: true, completion: nil)
     }
+    
+    //func showAppsMenu() {
+    //    self.present(appsMenu, animated: true, completion: nil)
+    //}
     
     func showSettingsPage() {
         if let userId = SFUserAccountManager.sharedInstance().currentUser?.idData.userId {
@@ -359,6 +383,24 @@ class RootViewController : UIViewController, WKNavigationDelegate, WKUIDelegate,
         
     func showNotificationsPage() {
         let urlString = "\(baseUrl)/s/my-notifications"
+        
+        if let url = NSURL(string: urlString) {
+            let req = NSURLRequest(url: url as URL)
+            webView?.load(req as URLRequest)
+        }
+    }
+    
+    func showChatterPage() {
+        let urlString = "\(baseUrl)/s/lets-talk"
+        
+        if let url = NSURL(string: urlString) {
+            let req = NSURLRequest(url: url as URL)
+            webView?.load(req as URLRequest)
+        }
+    }
+    
+    func showNewsPage() {
+        let urlString = "\(baseUrl)/s/news2"
         
         if let url = NSURL(string: urlString) {
             let req = NSURLRequest(url: url as URL)

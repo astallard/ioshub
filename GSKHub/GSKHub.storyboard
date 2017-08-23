@@ -129,7 +129,7 @@
                                                         <rect key="frame" x="195" y="0.0" width="32" height="30"/>
                                                         <state key="normal" image="AppsButtonImage"/>
                                                         <connections>
-                                                            <action selector="appsButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchDragInside" id="ab2-NQ-xVJ"/>
+                                                            <action selector="appsButtonTouchUpInside:" destination="ZqU-fs-1nW" eventType="touchUpInside" id="3aw-jr-Pc4"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cs-5S-TEd" userLabel="Translate Button">

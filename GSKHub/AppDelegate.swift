@@ -11,7 +11,7 @@
  * Neither the name of salesforce.com, inc. nor the names of its contributors may be used to
  endorse or promote products derived from this software without specific prior written
  permission of salesforce.com, inc.
- 
+ code
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
  IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
  FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
@@ -37,7 +37,7 @@ import UserNotifications
 let RemoteAccessConsumerKey = "3MVG9HxRZv05HarS4brxVfRfUP5AUnrk1106B94dr4lU4attwSUOvckCEIayZbBagftvA5gKOEg=="
 let OAuthRedirectURI        = "mymobileapp://callback"
 
-class AppDelegate : UIResponder, UIApplicationDelegate
+class AppDelegate : UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate
 {
     var window: UIWindow?
     
@@ -78,6 +78,9 @@ class AppDelegate : UIResponder, UIApplicationDelegate
             let launchActionString = SalesforceSDKManager.launchActionsStringRepresentation(launchActionList)
             self.log(.info, msg:"Post-launch: launch actions taken: \(launchActionString)");
             self.setupRootViewController();
+            
+            // Register for remote notifications
+            SFPushNotificationManager.sharedInstance().registerForRemoteNotifications()
         }
         SalesforceSDKManager.shared().launchErrorAction = {
             [unowned self] (error: Error, launchActionList: SFSDKLaunchAction) in
